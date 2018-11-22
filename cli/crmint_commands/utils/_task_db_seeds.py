@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # Copyright 2018 Google Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,17 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ------------------------- DB Migration ------------------------
-echo
-echo -e "$BLUE==>$NONE$BOLD DB Migration is started$NONE"
-cd $workdir/backends
+import run_ibackend
+from core.models import GeneralSetting
 
-source "$SCRIPTS_DIR/variables/common.sh"
-source "$SCRIPTS_DIR/deploy/before_task.sh"
-
-flask db upgrade
-flask db_seeds
-
-source "$SCRIPTS_DIR/deploy/after_task.sh"
-
-# ------------------------- END DB Migration ---------------------
+# SETUP SETTINGS
+SETTINGS = ['emails_for_notifications']
+for setting in SETTINGS:
+  gsetting = GeneralSetting.where(name=setting).first()
+  if not gsetting:
+    gsetting = GeneralSetting()
+    gsetting.name = setting
+    gsetting.save()
+    print 'Added setting', setting

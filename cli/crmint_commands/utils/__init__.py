@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # Copyright 2018 Google Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,18 +11,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# ------------------------- DB Migration ------------------------
-echo
-echo -e "$BLUE==>$NONE$BOLD DB Migration is started$NONE"
-cd $workdir/backends
-
-source "$SCRIPTS_DIR/variables/common.sh"
-source "$SCRIPTS_DIR/deploy/before_task.sh"
-
-flask db upgrade
-flask db_seeds
-
-source "$SCRIPTS_DIR/deploy/after_task.sh"
-
-# ------------------------- END DB Migration ---------------------
