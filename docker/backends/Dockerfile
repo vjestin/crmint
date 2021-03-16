@@ -67,7 +67,7 @@ RUN apk add --update mariadb-client-libs \
     && pip install -r core/requirements_dev.txt -t lib_dev \
     && pip install -r ibackend/requirements.txt -t lib \
     && pip install -r jbackend/requirements.txt -t lib \
-    && pip install "sphinx==1.7.2" "sphinx-autobuild==0.7.1" \
+    && pip install "watchdog==0.7.1" "sphinx==1.7.2" "sphinx-autobuild==0.7.1" \
     && pip install Mysql-Python \
     && apk del .bootstrap-deps
 
